@@ -40,12 +40,19 @@ class Drink extends Component {
   }
 } 
 
+const DetailsList = ({ items }) => (
+  <ul class='details-list'>
+    {items.map(i => <li>{i}</li>)}
+  </ul>
+)
+
 export default class App extends Component {
   state = {
     selected: null,
   }
 
   render(_, { selected }) {
+    const selectedDrink = selected ? drinks[selected - 1] : false;
     return (
       <div>
         <h1>Who needs a drink?</h1>
@@ -53,14 +60,9 @@ export default class App extends Component {
           drinks={drinks} 
           onSelectDrink={linkState(this, 'selected', 'id')}/>
         
-        {selected && <div class="selected">
-          {drinks[selected - 1].ingredients.map(i => <p>{i}</p>)}
-        </div>}
+        {selected && <DetailsList items={selectedDrink.ingredients} />} 
+        {selected && <DetailsList items={selectedDrink.directions} />}
 
-        {selected && <hr/>}
-        {selected && <div class="selected">
-          {drinks[selected - 1].directions.map(i => <p>{i}</p>)}
-        </div>}
       </div>
     );
   }

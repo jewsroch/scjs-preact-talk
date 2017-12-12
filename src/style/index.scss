@@ -10,9 +10,25 @@ h1 {
 	text-align: center;
 }
 
-.result {
-	padding: 10px;
-	margin: 10px;
-	background: white;
-	box-shadow: 0 1px 5px rgba(0,0,0,0.5);
+button {
+	padding: 10px 20px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+.drink-list {
+	display: flex;
+	justify-content: space-around;
+}
+
+.details-list {
+	display: inline-block;
+	width: 35%;
+	margin: 2%;
+	padding: 20px;
+	text-align: center;
+	border: 1px solid black;
 }
