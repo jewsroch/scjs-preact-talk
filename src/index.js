@@ -6,8 +6,6 @@ import { drinks } from "./data";
 /**
  * @TODOs
  * 
- * Build Ingredients Component
- * Build Steps Component
  * Add Toggle between each?
  * Add Images
  * Add Nicer Styles
@@ -15,7 +13,7 @@ import { drinks } from "./data";
  */
 
 const DrinkList = ({ drinks, onSelectDrink }) => (
- <ul class='drink-list'>
+ <ul class="drink-list">
     {drinks.map(({ name, id }) => (
       <Drink
         key={id}
@@ -40,10 +38,13 @@ class Drink extends Component {
   }
 } 
 
-const DetailsList = ({ items }) => (
-  <ul class='details-list'>
-    {items.map(i => <li>{i}</li>)}
-  </ul>
+const DetailsList = ({ items, title }) => (
+  <div class="details-list">
+    <h3>{title}</h3>
+    <ul>
+      {items.map(i => <li>{i}</li>)}
+    </ul>
+  </div>
 )
 
 export default class App extends Component {
@@ -58,10 +59,10 @@ export default class App extends Component {
         <h1>Who needs a drink?</h1>
         <DrinkList 
           drinks={drinks} 
-          onSelectDrink={linkState(this, 'selected', 'id')}/>
+          onSelectDrink={linkState(this, "selected", "id")}/>
         
-        {selected && <DetailsList items={selectedDrink.ingredients} />} 
-        {selected && <DetailsList items={selectedDrink.directions} />}
+        {selected && <DetailsList title="Ingredients" items={selectedDrink.ingredients} />} 
+        {selected && <DetailsList title="Directions" items={selectedDrink.directions} />}
 
       </div>
     );
