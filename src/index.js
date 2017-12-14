@@ -3,15 +3,6 @@ import { h, Component, render } from "preact";
 import linkState from "linkstate";
 import { drinks } from "./data";
 
-/**
- * @TODOs
- * 
- * Add Toggle between each?
- * Add Images
- * Add Nicer Styles
- * 
- */
-
 const DrinkList = ({ drinks, onSelectDrink }) => (
  <ul class="drink-list">
     {drinks.map(({ name, id }) => (
@@ -27,7 +18,7 @@ const DrinkList = ({ drinks, onSelectDrink }) => (
 
 class Drink extends Component {
   onClick = () => {
-    const { id, onSelectDrink } = this.props;
+    const { onSelectDrink, id } = this.props;
     onSelectDrink( { id });
   }
   
@@ -36,9 +27,32 @@ class Drink extends Component {
       <button onClick={this.onClick}>{name}</button>
     </li>;
   }
+}
+
+class DrinkDetails extends Component {
+  state = { flipped: false }
+  onFlipCard = () => this.setState({ flipped: !this.state.flipped});
+  render({ drink: { ingredients, directions } }, { flipped }) {
+    const flipButtonText = flipped ? 'Ingredients' : 'Directions';
+    return (<div class="details">
+      {!flipped && <Details
+        title="Ingredients"
+        items={ingredients} />}
+
+      {flipped && <Details
+        title="Directions"
+        items={directions} />}
+      
+      <button 
+        class="button-small button-outline" 
+        onClick={this.onFlipCard}>
+        {`View ${flipButtonText}`}
+      </button>
+    </div>);
+  }
 } 
 
-const DetailsList = ({ items, title }) => (
+const Details = ({ items, title }) => (
   <div class="details-list">
     <h3>{title}</h3>
     <ul>
@@ -49,7 +63,7 @@ const DetailsList = ({ items, title }) => (
 
 export default class App extends Component {
   state = {
-    selected: null,
+    selected: true,
   }
 
   render(_, { selected }) {
@@ -57,13 +71,12 @@ export default class App extends Component {
     return (
       <div>
         <h1>Who needs a drink?</h1>
+        
         <DrinkList 
           drinks={drinks} 
           onSelectDrink={linkState(this, "selected", "id")}/>
         
-        {selected && <DetailsList title="Ingredients" items={selectedDrink.ingredients} />} 
-        {selected && <DetailsList title="Directions" items={selectedDrink.directions} />}
-
+        {selected && <DrinkDetails drink={selectedDrink}/>}
       </div>
     );
   }

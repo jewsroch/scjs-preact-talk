@@ -1,17 +1,36 @@
 html, body {
-	font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
-	font-weight: 400;
-	color: #444;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	// font: 14px/1.21 'Helvetica Neue', arial, sans-serif;
+	// font-weight: 400;
+	// color: #444;
+	// -webkit-font-smoothing: antialiased;
+	// -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+	margin: 50px 10px;
+}
 h1 {
 	text-align: center;
 }
 
 button {
-	padding: 10px 20px;
+	background-color: #1fa3ec;
+	border-color: #1fa3ec;
+	.button-outline {
+		color: #1fa3ec;
+	}
+}
+
+button.button-outline {
+	color: #1fa3ec;
+}
+
+
+.button-small {
+  font-size: .8rem;
+  height: 2.8rem;
+  line-height: 2.8rem;
+  padding: 0 1.5rem;
 }
 
 ul {
@@ -24,11 +43,15 @@ ul {
 	justify-content: space-around;
 }
 
+.details {
+	text-align: center;
+}
 .details-list {
-	display: inline-block;
+	margin: 0 auto 20px;
 	width: 35%;
-	margin: 2%;
+	min-height: 265px;
 	padding: 10px 20px 20px;
 	text-align: center;
-	border: 1px solid black;
+	border: 1px solid #1fa3ec;
+	border-radius: 5px
 }
